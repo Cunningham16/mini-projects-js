@@ -1,0 +1,31 @@
+body{
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    background: linear-gradient(to right, #000000, #FFFFFF);
+    background-size: cover;
+    height: 620px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-repeat: no-repeat;
+}
+
+h1{
+    text-align: center;
+    font-size: 4em;
+}
+
+button{
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+    background-color: white;
+    border: none;
+    color: black;
+}
+
+h3{
+    text-align: center;
+    font-size: 2em;
+}
