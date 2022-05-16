@@ -1,6 +1,6 @@
 const bodyHtml = document.querySelector("body");
 const changeBtnBg = document.querySelector("button");
-let displayBackground = document.querySelector("h3");
+const displayBackground = document.querySelector("h3");
 
 const arr_en = ['a', 'b', 'c', 'd', 'e', 'f','0','1','2','3','4','5','6','7','8','9'];
 
@@ -17,8 +17,26 @@ function getRandomHex(){
     return hex;
 }
 
-function getLinearBg(counterColors, direction, isMultiCol){
+function getRandomDirection(){
+    const direction = getRandomInt(361)+"deg";
+    let turn;
+    if(direction === "0deg"){
+        turn = 'to top';
+    }else if(direction === "180deg"){
+        turn = 'to bottom';
+    }else if(direction === "270deg"){
+        turn = 'to left';
+    }else if(direction === "90deg"){
+        turn = 'to right';
+    }else{
+        turn = direction;
+    }
+    return turn;
+}
+
+function getLinearBg(counterColors, isMultiCol){
     if(isMultiCol === 1){
+        let direction = getRandomDirection();
         let bgConfig = "linear-gradient("+direction+", ";
         for(let i = 1; i < counterColors; i++){
             bgConfig = bgConfig + String(getRandomHex())+", ";
@@ -31,6 +49,7 @@ function getLinearBg(counterColors, direction, isMultiCol){
     }else if(isMultiCol > 1){
         let multiBg = '';
         for(let i = 1; i < isMultiCol; i++){
+            let direction = getRandomDirection();
             if(i < isMultiCol-1){
                 let bgConfig = "linear-gradient("+direction+", ";
                 for(let i = 1; i < counterColors; i++){
@@ -57,30 +76,15 @@ function getLinearBg(counterColors, direction, isMultiCol){
 }
 
 function setRandomBG(){
-    let directionGrad = String(getRandomInt(361))+"deg";
     let counterColors = getRandomInt(3)+1;
     let firstColor = getRandomHex();
-    let secondColor = getRandomHex();
-    let direction = getRandomInt(361)+"deg";
     let isMultiCol = getRandomInt(4)+1;
-
-    if(directionGrad === "0deg"){
-        direction = 'to top';
-    }else if(directionGrad === "180deg"){
-        direction = 'to bottom';
-    }else if(directionGrad === "270deg"){
-        direction = 'to left';
-    }else if(directionGrad === "90deg"){
-        direction = 'to right';
-    }else{
-        direction = directionGrad;
-    }
 
     if(counterColors === 1){
         bodyHtml.style.background = firstColor;
         displayBackground.textContent = "Background:  "+firstColor+";";
     }else if(counterColors > 1){
-        getLinearBg(counterColors, direction, isMultiCol);
+        getLinearBg(counterColors, isMultiCol);
     }
 }
 setRandomBG();

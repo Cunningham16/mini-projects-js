@@ -1,0 +1,65 @@
+body{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    font-family: "Montserrat", sans-serif;
+}
+
+.greetings__name{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.input__name, .input__task{
+    border: none;
+    background: transparent;
+    transition: 0.5s;
+    height: 40px;
+    outline: none;
+    font-size: 2em;
+    min-width:170px;
+    color: white;
+}
+
+.input__task{
+    text-align: center;
+}
+
+.input__name::-webkit-input-placeholder, .input__task::-webkit-input-placeholder{
+    color: white;
+}
+
+.input__name:hover, .input__name:focus, .input__task:hover, .input__task:focus{
+    box-shadow: 2px 2px 7px 2px rgba(0, 0, 0, 0.2);
+}
+
+h1{
+    font-size: 7em;
+    line-height: 0.5em;
+    margin-bottom: 15px;
+    transform: translate(0, 300%);
+    opacity: 0;
+}
+
+h3{
+    font-size: 2em;
+    transform: translate(0, 300%);
+    opacity: 0;
+}
+
+.addictional__text{
+    font-size: 1.2em;
+    transform: translate(0, 300%);
+    opacity: 0;
+}
