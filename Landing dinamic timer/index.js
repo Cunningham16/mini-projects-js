@@ -1,18 +1,21 @@
 let timerDisplay = document.querySelector(".timer");
+let timerContainer = document.querySelector(".timer__container");
 let greetingsDisplay = document.querySelector(".greetings");
+let greetingsAnimation = document.querySelector(".greetings__name");
 let bodyBackground = document.querySelector("body");
-let optionalText = document.querySelector(".addictional__text")
+let optionalText = document.querySelector(".addictional__text");
+let timeAM_PM = document.querySelector(".AM_or_PM");
 
 function formBG(hour){
     if(hour >= 5 && hour < 12){
         greetingsDisplay.textContent = "Good Morning, ";
-        bodyBackground.style.backgroundImage = "url(img/morning.jfif)";
+        bodyBackground.style.backgroundImage = "url(img/morning.jpg)";
     }else if(hour >= 12 && hour < 18){
         greetingsDisplay.textContent = "Good Afternoon, ";
-        bodyBackground.style.backgroundImage = "url(img/afternoon.jfif)";
+        bodyBackground.style.backgroundImage = "url(img/afternoon.jpg)";
     }else if(hour >= 18 && hour < 23){
         greetingsDisplay.textContent = "Good Evening, ";
-        bodyBackground.style.backgroundImage = "url(img/evening.jfif)";
+        bodyBackground.style.backgroundImage = "url(img/evening.jpg)";
     }else if(hour >= 23 && hour < 5){
         greetingsDisplay.textContent = "You should go sleep, ";
         bodyBackground.style.backgroundImage = "url(img/night.jfif)";
@@ -25,10 +28,11 @@ document.addEventListener("DOMContentLoaded", function(){
     function formTime(hour,isHalf){
         let time = hour+":"+timeWatch.toTen(timeWatch.minutes)+":"+timeWatch.toTen(timeWatch.seconds);
         if(isHalf === true){
-            timerDisplay.textContent = time + " PM";
+            timeAM_PM.textContent = "PM";
         }else{
-            timerDisplay.textContent = time + " AM";
+            timeAM_PM.textContent = "AM";
         }
+        timerDisplay.textContent = time;
     };
 
     const timeWatch = {
@@ -60,14 +64,14 @@ document.addEventListener("DOMContentLoaded", function(){
     }
     
     setTimeout(function(){
-        timerDisplay.style.transform = "translate(0, 0)";
-        timerDisplay.style.transition = "1s";
-        timerDisplay.style.opacity = "1";
+        timerContainer.style.transform = "translate(0, 0)";
+        timerContainer.style.transition = "1s";
+        timerContainer.style.opacity = "1";
     }, 500);
     setTimeout(function(){
-        greetingsDisplay.style.transform = "translate(0, 0)";
-        greetingsDisplay.style.transition = "1s";
-        greetingsDisplay.style.opacity = "1";
+        greetingsAnimation.style.transform = "translate(0, 0)";
+        greetingsAnimation.style.transition = "1s";
+        greetingsAnimation.style.opacity = "1";
     }, 1800);
     setTimeout(function(){
         optionalText.style.transform = "translate(0, 0)";
@@ -97,10 +101,11 @@ setInterval(function(){
     function formTime(hour,isHalf){
         let time = hour+":"+timeWatch.toTen(timeWatch.minutes)+":"+timeWatch.toTen(timeWatch.seconds);
         if(isHalf === true){
-            timerDisplay.textContent = time + " PM";
+            timeAM_PM.textContent = "PM";
         }else{
-            timerDisplay.textContent = time + " AM";
+            timeAM_PM.textContent = "AM";
         }
+        timerDisplay.textContent = time;
     };
     
     let halfDayOver;
@@ -115,3 +120,40 @@ setInterval(function(){
         formTime(timeWatch.hour, halfDayOver);
     }
 },1000);
+
+const inputNameNode = document.querySelector(".input__name");
+const inputTaskNode = document.querySelector(".input__task");
+
+inputNameNode.value = localStorage.getItem("user_name");
+if(inputNameNode.value === ""){
+    inputNameNode.style.width = "200px";
+}else{
+    inputNameNode.style.width = `${inputNameNode.value.length * 17.5}px`;
+}
+
+inputTaskNode.value = localStorage.getItem("user_task");
+if(inputTaskNode.value === ""){
+    inputTaskNode.style.width = "400px";
+}else{
+    inputTaskNode.style.width = `${inputTaskNode.value.length * 21.5}px`;
+}
+
+inputNameNode.addEventListener("input", function(){
+    if(inputNameNode.value === ""){
+        inputNameNode.style.width = "200px";
+        localStorage.setItem("user_name", "");
+    }else if(inputNameNode.value !== ""){
+        inputNameNode.style.width = `${inputNameNode.value.length * 17.5}px`;
+        localStorage.setItem("user_name", inputNameNode.value);
+    }
+});
+
+inputTaskNode.addEventListener("input", function(){
+    if(inputTaskNode.value === ""){
+        inputTaskNode.style.width = "400px";
+        localStorage.setItem("user_task", "");
+    }else if(inputTaskNode.value !== ""){
+        inputTaskNode.style.width = `${inputTaskNode.value.length * 21.5}px`;
+        localStorage.setItem("user_task", inputTaskNode.value);
+    }
+});
